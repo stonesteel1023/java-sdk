@@ -25,6 +25,7 @@ public final class GsonSingleton {
 
   private static Gson gson;
   private static Gson gsonWithoutPrinting;
+  private static Gson gsonWithoutPrintingAndNulls;
 
   private GsonSingleton() {
     // This is a utility class - no instantiation allowed.
@@ -34,15 +35,19 @@ public final class GsonSingleton {
    * Creates a {@link com.google.gson.Gson} object that can be use to serialize and deserialize Java objects.
    *
    * @param prettyPrint if true the JSON will be pretty printed
+   * @param returnNulls if true, null JSON properties will be returned
    * @return the {@link Gson}
    */
-  private static Gson createGson(Boolean prettyPrint) {
+  private static Gson createGson(Boolean prettyPrint, Boolean returnNulls) {
     GsonBuilder builder = new GsonBuilder();
 
     registerTypeAdapters(builder);
 
     if (prettyPrint) {
       builder.setPrettyPrinting();
+    }
+    if (returnNulls) {
+      builder.serializeNulls();
     }
     builder.disableHtmlEscaping();
     return builder.create();
@@ -61,7 +66,7 @@ public final class GsonSingleton {
    */
   public static synchronized Gson getGson() {
     if (gson == null) {
-      gson = createGson(true);
+      gson = createGson(true, false);
     }
     return gson;
   }
@@ -73,8 +78,20 @@ public final class GsonSingleton {
    */
   public static synchronized Gson getGsonWithoutPrettyPrinting() {
     if (gsonWithoutPrinting == null) {
-      gsonWithoutPrinting = createGson(false);
+      gsonWithoutPrinting = createGson(false, false);
     }
     return gsonWithoutPrinting;
+  }
+
+  /**
+   * Gets the Gson instance.
+   *
+   * @return the Gson
+   */
+  public static synchronized Gson getGsonWithoutPrettyPrintingAndNulls() {
+    if (gsonWithoutPrintingAndNulls == null) {
+      gsonWithoutPrintingAndNulls = createGson(false, true);
+    }
+    return gsonWithoutPrintingAndNulls;
   }
 }

@@ -36,6 +36,7 @@ import com.ibm.watson.developer_cloud.service.exception.UnsupportedException;
 import com.ibm.watson.developer_cloud.service.security.IamOptions;
 import com.ibm.watson.developer_cloud.service.security.IamTokenManager;
 import com.ibm.watson.developer_cloud.util.CredentialUtils;
+import com.ibm.watson.developer_cloud.util.GsonSingleton;
 import com.ibm.watson.developer_cloud.util.RequestUtils;
 import com.ibm.watson.developer_cloud.util.ResponseConverterUtils;
 import com.ibm.watson.developer_cloud.util.ResponseUtils;
@@ -76,6 +77,7 @@ public abstract class WatsonService {
   private String endPoint;
   private String defaultEndPoint;
   private final String name;
+  private boolean returnNulls;
   private IamTokenManager tokenManager;
 
   private OkHttpClient client;
@@ -289,6 +291,24 @@ public abstract class WatsonService {
   }
 
   /**
+   * Gets returnNulls.
+   *
+   * @return boolean determining whether to return null properties
+   */
+  public boolean shouldReturnNulls() {
+    return this.returnNulls;
+  }
+
+  /**
+   * Sets returnNulls.
+   *
+   * @param returnNulls the boolean determining whether to return null properties
+   */
+  public void setReturnNulls(boolean returnNulls) {
+    this.returnNulls = returnNulls;
+  }
+
+  /**
    * Sets the API key.
    *
    * @param apiKey the new API key
@@ -374,7 +394,6 @@ public abstract class WatsonService {
 
   /*
    * (non-Javadoc)
-   *
    * @see java.lang.Object#toString()
    */
   @Override
@@ -387,7 +406,6 @@ public abstract class WatsonService {
 
     return builder.append(']').toString();
   }
-
 
   /**
    * Process service call.
@@ -413,7 +431,7 @@ public abstract class WatsonService {
         throw new BadRequestException(error != null ? error : "Bad Request", response);
       case HttpStatus.UNAUTHORIZED: // HTTP 401
         throw new UnauthorizedException("Unauthorized: Access is denied due to invalid credentials. "
-                                        + "Tip: Did you set the Endpoint?", response);
+            + "Tip: Did you set the Endpoint?", response);
       case HttpStatus.FORBIDDEN: // HTTP 403
         throw new ForbiddenException(error != null ? error : "Forbidden: Service refuse the request", response);
       case HttpStatus.NOT_FOUND: // HTTP 404
@@ -554,8 +572,7 @@ public abstract class WatsonService {
 
     @Override
     public CompletableFuture<com.ibm.watson.developer_cloud.http.Response<T>> rxWithDetails() {
-      final CompletableFuture<com.ibm.watson.developer_cloud.http.Response<T>> completableFuture
-          = new CompletableFuture<>();
+      final CompletableFuture<com.ibm.watson.developer_cloud.http.Response<T>> completableFuture = new CompletableFuture<>();
 
       call.enqueue(new Callback() {
         @Override

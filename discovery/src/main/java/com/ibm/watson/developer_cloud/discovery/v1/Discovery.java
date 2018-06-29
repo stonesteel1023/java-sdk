@@ -172,7 +172,7 @@ public class Discovery extends WatsonService {
       contentJson.addProperty("size", createEnvironmentOptions.size());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Environment.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Environment.class, shouldReturnNulls()));
   }
 
   /**
@@ -204,7 +204,7 @@ public class Discovery extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Environment.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Environment.class, shouldReturnNulls()));
   }
 
   /**
@@ -224,7 +224,8 @@ public class Discovery extends WatsonService {
         builder.query("name", listEnvironmentsOptions.name());
       }
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListEnvironmentsResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListEnvironmentsResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -254,7 +255,8 @@ public class Discovery extends WatsonService {
         pathParameters));
     builder.query(VERSION, versionDate);
     builder.query("collection_ids", RequestUtils.join(listFieldsOptions.collectionIds(), ","));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListCollectionFieldsResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListCollectionFieldsResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -281,7 +283,7 @@ public class Discovery extends WatsonService {
       contentJson.addProperty("description", updateEnvironmentOptions.description());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Environment.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Environment.class, shouldReturnNulls()));
   }
 
   /**
@@ -325,7 +327,8 @@ public class Discovery extends WatsonService {
           .normalizations()));
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Configuration.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Configuration.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -363,7 +366,8 @@ public class Discovery extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Configuration.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Configuration.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -385,7 +389,8 @@ public class Discovery extends WatsonService {
     if (listConfigurationsOptions.name() != null) {
       builder.query("name", listConfigurationsOptions.name());
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListConfigurationsResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListConfigurationsResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -428,7 +433,8 @@ public class Discovery extends WatsonService {
           .normalizations()));
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Configuration.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Configuration.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -472,7 +478,8 @@ public class Discovery extends WatsonService {
       multipartBuilder.addFormDataPart("metadata", testConfigurationInEnvironmentOptions.metadata());
     }
     builder.body(multipartBuilder.build());
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TestDocument.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TestDocument.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -500,7 +507,7 @@ public class Discovery extends WatsonService {
       contentJson.addProperty("language", createCollectionOptions.language());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Collection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Collection.class, shouldReturnNulls()));
   }
 
   /**
@@ -532,7 +539,7 @@ public class Discovery extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Collection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Collection.class, shouldReturnNulls()));
   }
 
   /**
@@ -552,7 +559,8 @@ public class Discovery extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListCollectionFieldsResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListCollectionFieldsResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -573,7 +581,8 @@ public class Discovery extends WatsonService {
     if (listCollectionsOptions.name() != null) {
       builder.query("name", listCollectionsOptions.name());
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListCollectionsResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListCollectionsResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -600,7 +609,7 @@ public class Discovery extends WatsonService {
       contentJson.addProperty("configuration_id", updateCollectionOptions.configurationId());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Collection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Collection.class, shouldReturnNulls()));
   }
 
   /**
@@ -625,7 +634,7 @@ public class Discovery extends WatsonService {
       contentJson.add("expansions", GsonSingleton.getGson().toJsonTree(createExpansionsOptions.expansions()));
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Expansions.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Expansions.class, shouldReturnNulls()));
   }
 
   /**
@@ -663,7 +672,7 @@ public class Discovery extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Expansions.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Expansions.class, shouldReturnNulls()));
   }
 
   /**
@@ -712,7 +721,8 @@ public class Discovery extends WatsonService {
       multipartBuilder.addFormDataPart("metadata", addDocumentOptions.metadata());
     }
     builder.body(multipartBuilder.build());
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DocumentAccepted.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DocumentAccepted.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -753,7 +763,8 @@ public class Discovery extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DocumentStatus.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DocumentStatus.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -785,7 +796,8 @@ public class Discovery extends WatsonService {
       multipartBuilder.addFormDataPart("metadata", updateDocumentOptions.metadata());
     }
     builder.body(multipartBuilder.build());
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DocumentAccepted.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DocumentAccepted.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -847,7 +859,8 @@ public class Discovery extends WatsonService {
     if (federatedQueryOptions.similarFields() != null) {
       builder.query("similar.fields", RequestUtils.join(federatedQueryOptions.similarFields(), ","));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -909,7 +922,8 @@ public class Discovery extends WatsonService {
     if (federatedQueryNoticesOptions.similarFields() != null) {
       builder.query("similar.fields", RequestUtils.join(federatedQueryNoticesOptions.similarFields(), ","));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryNoticesResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryNoticesResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -983,7 +997,8 @@ public class Discovery extends WatsonService {
     if (queryOptions.similarFields() != null) {
       builder.query("similar.fields", RequestUtils.join(queryOptions.similarFields(), ","));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1019,7 +1034,8 @@ public class Discovery extends WatsonService {
       contentJson.addProperty("evidence_count", queryEntitiesOptions.evidenceCount());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryEntitiesResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryEntitiesResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1091,7 +1107,8 @@ public class Discovery extends WatsonService {
     if (queryNoticesOptions.similarFields() != null) {
       builder.query("similar.fields", RequestUtils.join(queryNoticesOptions.similarFields(), ","));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryNoticesResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryNoticesResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1130,7 +1147,8 @@ public class Discovery extends WatsonService {
       contentJson.addProperty("evidence_count", queryRelationsOptions.evidenceCount());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryRelationsResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(QueryRelationsResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1159,7 +1177,8 @@ public class Discovery extends WatsonService {
       contentJson.add("examples", GsonSingleton.getGson().toJsonTree(addTrainingDataOptions.examples()));
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingQuery.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingQuery.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1189,7 +1208,8 @@ public class Discovery extends WatsonService {
       contentJson.addProperty("relevance", createTrainingExampleOptions.relevance());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingExample.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingExample.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1265,7 +1285,8 @@ public class Discovery extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingQuery.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingQuery.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1284,7 +1305,8 @@ public class Discovery extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingExample.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingExample.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1302,7 +1324,8 @@ public class Discovery extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingDataSet.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingDataSet.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1322,7 +1345,8 @@ public class Discovery extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingExampleList.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingExampleList.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1349,7 +1373,8 @@ public class Discovery extends WatsonService {
       contentJson.addProperty("relevance", updateTrainingExampleOptions.relevance());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingExample.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TrainingExample.class,
+        shouldReturnNulls()));
   }
 
   /**

@@ -135,7 +135,8 @@ public class ToneAnalyzer extends WatsonService {
     } else {
       builder.bodyContent(toneOptions.body(), toneOptions.contentType());
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ToneAnalysis.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ToneAnalysis.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -169,7 +170,8 @@ public class ToneAnalyzer extends WatsonService {
     final JsonObject contentJson = new JsonObject();
     contentJson.add("utterances", GsonSingleton.getGson().toJsonTree(toneChatOptions.utterances()));
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(UtteranceAnalyses.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(UtteranceAnalyses.class,
+        shouldReturnNulls()));
   }
 
 }

@@ -187,7 +187,8 @@ public class SpeechToText extends WatsonService {
     String[] pathParameters = { getModelOptions.modelId() };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(SpeechModel.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(SpeechModel.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -204,7 +205,8 @@ public class SpeechToText extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments));
     if (listModelsOptions != null) {
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(SpeechModels.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(SpeechModels.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -328,7 +330,8 @@ public class SpeechToText extends WatsonService {
     }
     builder.body(InputStreamRequestBody.create(MediaType.parse(recognizeOptions.contentType()),
         recognizeOptions.audio()));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(SpeechRecognitionResults.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(SpeechRecognitionResults.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -401,7 +404,8 @@ public class SpeechToText extends WatsonService {
     String[] pathParameters = { checkJobOptions.id() };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(RecognitionJob.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(RecognitionJob.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -422,7 +426,8 @@ public class SpeechToText extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments));
     if (checkJobsOptions != null) {
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(RecognitionJobs.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(RecognitionJobs.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -557,7 +562,8 @@ public class SpeechToText extends WatsonService {
     }
     builder.body(InputStreamRequestBody.create(MediaType.parse(createJobOptions.contentType()), createJobOptions
         .audio()));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(RecognitionJob.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(RecognitionJob.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -619,7 +625,8 @@ public class SpeechToText extends WatsonService {
     if (registerCallbackOptions.userSecret() != null) {
       builder.query("user_secret", registerCallbackOptions.userSecret());
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(RegisterStatus.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(RegisterStatus.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -663,7 +670,8 @@ public class SpeechToText extends WatsonService {
       contentJson.addProperty("description", createLanguageModelOptions.description());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LanguageModel.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LanguageModel.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -700,7 +708,8 @@ public class SpeechToText extends WatsonService {
     String[] pathParameters = { getLanguageModelOptions.customizationId() };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LanguageModel.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LanguageModel.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -722,7 +731,8 @@ public class SpeechToText extends WatsonService {
         builder.query("language", listLanguageModelsOptions.language());
       }
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LanguageModels.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LanguageModels.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -925,7 +935,8 @@ public class SpeechToText extends WatsonService {
     String[] pathParameters = { getCorpusOptions.customizationId(), getCorpusOptions.corpusName() };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Corpus.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Corpus.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -944,7 +955,8 @@ public class SpeechToText extends WatsonService {
     String[] pathParameters = { listCorporaOptions.customizationId() };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Corpora.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Corpora.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1098,7 +1110,8 @@ public class SpeechToText extends WatsonService {
     String[] pathParameters = { getWordOptions.customizationId(), getWordOptions.wordName() };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Word.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Word.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1125,7 +1138,8 @@ public class SpeechToText extends WatsonService {
     if (listWordsOptions.sort() != null) {
       builder.query("sort", listWordsOptions.sort());
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Words.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Words.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1149,7 +1163,8 @@ public class SpeechToText extends WatsonService {
       contentJson.addProperty("description", createAcousticModelOptions.description());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AcousticModel.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AcousticModel.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1186,7 +1201,8 @@ public class SpeechToText extends WatsonService {
     String[] pathParameters = { getAcousticModelOptions.customizationId() };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AcousticModel.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AcousticModel.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1208,7 +1224,8 @@ public class SpeechToText extends WatsonService {
         builder.query("language", listAcousticModelsOptions.language());
       }
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AcousticModels.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AcousticModels.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1469,7 +1486,8 @@ public class SpeechToText extends WatsonService {
     String[] pathParameters = { getAudioOptions.customizationId(), getAudioOptions.audioName() };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AudioListing.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AudioListing.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1490,7 +1508,8 @@ public class SpeechToText extends WatsonService {
     String[] pathParameters = { listAudioOptions.customizationId() };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AudioResources.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AudioResources.class,
+        shouldReturnNulls()));
   }
 
   /**

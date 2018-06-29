@@ -175,7 +175,8 @@ public class VisualRecognition extends WatsonService {
       multipartBuilder.addFormDataPart("classifier_ids", RequestUtils.join(classifyOptions.classifierIds(), ","));
     }
     builder.body(multipartBuilder.build());
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ClassifiedImages.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ClassifiedImages.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -230,7 +231,8 @@ public class VisualRecognition extends WatsonService {
       multipartBuilder.addFormDataPart("url", detectFacesOptions.url());
     }
     builder.body(multipartBuilder.build());
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DetectedFaces.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DetectedFaces.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -289,7 +291,8 @@ public class VisualRecognition extends WatsonService {
           negativeExamplesBody);
     }
     builder.body(multipartBuilder.build());
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifier.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifier.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -323,7 +326,8 @@ public class VisualRecognition extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifier.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifier.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -341,7 +345,8 @@ public class VisualRecognition extends WatsonService {
         builder.query("verbose", String.valueOf(listClassifiersOptions.verbose()));
       }
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifiers.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifiers.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -398,7 +403,8 @@ public class VisualRecognition extends WatsonService {
           negativeExamplesBody);
     }
     builder.body(multipartBuilder.build());
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifier.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifier.class,
+        shouldReturnNulls()));
   }
 
   /**

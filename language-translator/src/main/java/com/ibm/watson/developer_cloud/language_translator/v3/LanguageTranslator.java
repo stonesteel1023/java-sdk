@@ -123,7 +123,8 @@ public class LanguageTranslator extends WatsonService {
       contentJson.addProperty("target", translateOptions.target());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TranslationResult.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TranslationResult.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -140,7 +141,8 @@ public class LanguageTranslator extends WatsonService {
     RequestBuilder builder = RequestBuilder.post(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments));
     builder.query(VERSION, versionDate);
     builder.bodyContent(identifyOptions.text(), "text/plain");
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IdentifiedLanguages.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IdentifiedLanguages.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -160,7 +162,8 @@ public class LanguageTranslator extends WatsonService {
     builder.query(VERSION, versionDate);
     if (listIdentifiableLanguagesOptions != null) {
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IdentifiableLanguages.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IdentifiableLanguages.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -220,7 +223,8 @@ public class LanguageTranslator extends WatsonService {
           parallelCorpusBody);
     }
     builder.body(multipartBuilder.build());
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TranslationModel.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TranslationModel.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -257,7 +261,8 @@ public class LanguageTranslator extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
     builder.query(VERSION, versionDate);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TranslationModel.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TranslationModel.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -283,7 +288,8 @@ public class LanguageTranslator extends WatsonService {
         builder.query("default", String.valueOf(listModelsOptions.defaultModels()));
       }
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TranslationModels.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(TranslationModels.class,
+        shouldReturnNulls()));
   }
 
   /**

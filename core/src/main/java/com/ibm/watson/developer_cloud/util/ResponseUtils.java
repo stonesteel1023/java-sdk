@@ -86,11 +86,15 @@ public final class ResponseUtils {
    * @param type the type of the response
    * @return the POJO
    */
-  public static <T extends ObjectModel> T getObject(Response response, Class<? extends T> type) {
+  public static <T extends ObjectModel> T getObject(Response response, Class<? extends T> type, boolean returnNulls) {
     JsonReader reader;
     try {
       reader = new JsonReader(response.body().charStream());
-      return GsonSingleton.getGsonWithoutPrettyPrinting().fromJson(reader, type);
+      if (returnNulls) {
+        return GsonSingleton.getGsonWithoutPrettyPrintingAndNulls().fromJson(reader, type);
+      } else {
+        return GsonSingleton.getGsonWithoutPrettyPrinting().fromJson(reader, type);
+      }
     } finally {
       response.body().close();
     }

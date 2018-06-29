@@ -88,8 +88,8 @@ import com.ibm.watson.developer_cloud.util.ResponseConverterUtils;
 import com.ibm.watson.developer_cloud.util.Validator;
 
 /**
- * The IBM Watson Assistant service combines machine learning, natural language understanding, and integrated dialog
- * tools to create conversation flows between your apps and your users.
+ * The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and integrated
+ * dialog tools to create conversation flows between your apps and your users.
  *
  * @version v1
  * @see <a href="http://www.ibm.com/watson/developercloud/assistant.html">Assistant</a>
@@ -150,7 +150,9 @@ public class Assistant extends WatsonService {
   /**
    * Get response to user input.
    *
-   * Get a response to a user's input. There is no rate limit for this operation.
+   * Get a response to a user's input.
+   *
+   * There is no rate limit for this operation.
    *
    * @param messageOptions the {@link MessageOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link MessageResponse}
@@ -185,15 +187,17 @@ public class Assistant extends WatsonService {
       contentJson.add("output", GsonSingleton.getGson().toJsonTree(messageOptions.output()));
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(MessageResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(MessageResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
    * Create workspace.
    *
    * Create a workspace based on component objects. You must provide workspace components defining the content of the
-   * new workspace. This operation is limited to 30 requests per 30 minutes. For more information, see **Rate
-   * limiting**.
+   * new workspace.
+   *
+   * This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createWorkspaceOptions the {@link CreateWorkspaceOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Workspace}
@@ -234,15 +238,16 @@ public class Assistant extends WatsonService {
       }
       builder.bodyJson(contentJson);
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Workspace.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Workspace.class, shouldReturnNulls()));
   }
 
   /**
    * Create workspace.
    *
    * Create a workspace based on component objects. You must provide workspace components defining the content of the
-   * new workspace. This operation is limited to 30 requests per 30 minutes. For more information, see **Rate
-   * limiting**.
+   * new workspace.
+   *
+   * This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @return a {@link ServiceCall} with a response type of {@link Workspace}
    */
@@ -253,8 +258,9 @@ public class Assistant extends WatsonService {
   /**
    * Delete workspace.
    *
-   * Delete a workspace from the service instance. This operation is limited to 30 requests per 30 minutes. For more
-   * information, see **Rate limiting**.
+   * Delete a workspace from the service instance.
+   *
+   * This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteWorkspaceOptions the {@link DeleteWorkspaceOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of Void
@@ -272,9 +278,10 @@ public class Assistant extends WatsonService {
   /**
    * Get information about a workspace.
    *
-   * Get information about a workspace, optionally including all workspace content. With **export**=`false`, this
-   * operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the limit is 20 requests per 30
-   * minutes. For more information, see **Rate limiting**.
+   * Get information about a workspace, optionally including all workspace content.
+   *
+   * With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
+   * limit is 20 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param getWorkspaceOptions the {@link GetWorkspaceOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link WorkspaceExport}
@@ -292,14 +299,16 @@ public class Assistant extends WatsonService {
     if (getWorkspaceOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getWorkspaceOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(WorkspaceExport.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(WorkspaceExport.class,
+        shouldReturnNulls()));
   }
 
   /**
    * List workspaces.
    *
-   * List the workspaces associated with a Watson Assistant service instance. This operation is limited to 500 requests
-   * per 30 minutes. For more information, see **Rate limiting**.
+   * List the workspaces associated with a Watson Assistant service instance.
+   *
+   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listWorkspacesOptions the {@link ListWorkspacesOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link WorkspaceCollection}
@@ -325,14 +334,16 @@ public class Assistant extends WatsonService {
         builder.query("include_audit", String.valueOf(listWorkspacesOptions.includeAudit()));
       }
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(WorkspaceCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(WorkspaceCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
    * List workspaces.
    *
-   * List the workspaces associated with a Watson Assistant service instance. This operation is limited to 500 requests
-   * per 30 minutes. For more information, see **Rate limiting**.
+   * List the workspaces associated with a Watson Assistant service instance.
+   *
+   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @return a {@link ServiceCall} with a response type of {@link WorkspaceCollection}
    */
@@ -344,8 +355,9 @@ public class Assistant extends WatsonService {
    * Update workspace.
    *
    * Update an existing workspace with new or modified data. You must provide component objects defining the content of
-   * the updated workspace. This operation is limited to 30 request per 30 minutes. For more information, see **Rate
-   * limiting**.
+   * the updated workspace.
+   *
+   * This operation is limited to 30 request per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateWorkspaceOptions the {@link UpdateWorkspaceOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Workspace}
@@ -389,14 +401,15 @@ public class Assistant extends WatsonService {
       contentJson.addProperty("learning_opt_out", updateWorkspaceOptions.learningOptOut());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Workspace.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Workspace.class, shouldReturnNulls()));
   }
 
   /**
    * Create intent.
    *
-   * Create a new intent. This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate
-   * limiting**.
+   * Create a new intent.
+   *
+   * This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createIntentOptions the {@link CreateIntentOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Intent}
@@ -417,14 +430,15 @@ public class Assistant extends WatsonService {
       contentJson.add("examples", GsonSingleton.getGson().toJsonTree(createIntentOptions.examples()));
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Intent.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Intent.class, shouldReturnNulls()));
   }
 
   /**
    * Delete intent.
    *
-   * Delete an intent from a workspace. This operation is limited to 2000 requests per 30 minutes. For more information,
-   * see **Rate limiting**.
+   * Delete an intent from a workspace.
+   *
+   * This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteIntentOptions the {@link DeleteIntentOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of Void
@@ -442,9 +456,10 @@ public class Assistant extends WatsonService {
   /**
    * Get intent.
    *
-   * Get information about an intent, optionally including all intent content. With **export**=`false`, this operation
-   * is limited to 6000 requests per 5 minutes. With **export**=`true`, the limit is 400 requests per 30 minutes. For
-   * more information, see **Rate limiting**.
+   * Get information about an intent, optionally including all intent content.
+   *
+   * With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
+   * limit is 400 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param getIntentOptions the {@link GetIntentOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link IntentExport}
@@ -462,15 +477,17 @@ public class Assistant extends WatsonService {
     if (getIntentOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getIntentOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IntentExport.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IntentExport.class,
+        shouldReturnNulls()));
   }
 
   /**
    * List intents.
    *
-   * List the intents for a workspace. With **export**=`false`, this operation is limited to 2000 requests per 30
-   * minutes. With **export**=`true`, the limit is 400 requests per 30 minutes. For more information, see **Rate
-   * limiting**.
+   * List the intents for a workspace.
+   *
+   * With **export**=`false`, this operation is limited to 2000 requests per 30 minutes. With **export**=`true`, the
+   * limit is 400 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listIntentsOptions the {@link ListIntentsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link IntentCollection}
@@ -500,15 +517,17 @@ public class Assistant extends WatsonService {
     if (listIntentsOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listIntentsOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IntentCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IntentCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
    * Update intent.
    *
    * Update an existing intent with new or modified data. You must provide component objects defining the content of the
-   * updated intent. This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate
-   * limiting**.
+   * updated intent.
+   *
+   * This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateIntentOptions the {@link UpdateIntentOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Intent}
@@ -531,14 +550,15 @@ public class Assistant extends WatsonService {
       contentJson.addProperty("description", updateIntentOptions.newDescription());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Intent.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Intent.class, shouldReturnNulls()));
   }
 
   /**
    * Create user input example.
    *
-   * Add a new user input example to an intent. This operation is limited to 1000 requests per 30 minutes. For more
-   * information, see **Rate limiting**.
+   * Add a new user input example to an intent.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createExampleOptions the {@link CreateExampleOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Example}
@@ -553,14 +573,15 @@ public class Assistant extends WatsonService {
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("text", createExampleOptions.text());
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class, shouldReturnNulls()));
   }
 
   /**
    * Delete user input example.
    *
-   * Delete a user input example from an intent. This operation is limited to 1000 requests per 30 minutes. For more
-   * information, see **Rate limiting**.
+   * Delete a user input example from an intent.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteExampleOptions the {@link DeleteExampleOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of Void
@@ -579,8 +600,9 @@ public class Assistant extends WatsonService {
   /**
    * Get user input example.
    *
-   * Get information about a user input example. This operation is limited to 6000 requests per 5 minutes. For more
-   * information, see **Rate limiting**.
+   * Get information about a user input example.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
    *
    * @param getExampleOptions the {@link GetExampleOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Example}
@@ -595,14 +617,15 @@ public class Assistant extends WatsonService {
     if (getExampleOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getExampleOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class, shouldReturnNulls()));
   }
 
   /**
    * List user input examples.
    *
-   * List the user input examples for an intent. This operation is limited to 2500 requests per 30 minutes. For more
-   * information, see **Rate limiting**.
+   * List the user input examples for an intent.
+   *
+   * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listExamplesOptions the {@link ListExamplesOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link ExampleCollection}
@@ -629,14 +652,16 @@ public class Assistant extends WatsonService {
     if (listExamplesOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listExamplesOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ExampleCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ExampleCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
    * Update user input example.
    *
-   * Update the text of a user input example. This operation is limited to 1000 requests per 30 minutes. For more
-   * information, see **Rate limiting**.
+   * Update the text of a user input example.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateExampleOptions the {@link UpdateExampleOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Example}
@@ -654,13 +679,14 @@ public class Assistant extends WatsonService {
       contentJson.addProperty("text", updateExampleOptions.newText());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class, shouldReturnNulls()));
   }
 
   /**
    * Create counterexample.
    *
    * Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
+   *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createCounterexampleOptions the {@link CreateCounterexampleOptions} containing the options for the call
@@ -676,13 +702,15 @@ public class Assistant extends WatsonService {
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("text", createCounterexampleOptions.text());
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class,
+        shouldReturnNulls()));
   }
 
   /**
    * Delete counterexample.
    *
    * Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
+   *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteCounterexampleOptions the {@link DeleteCounterexampleOptions} containing the options for the call
@@ -702,6 +730,7 @@ public class Assistant extends WatsonService {
    * Get counterexample.
    *
    * Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+   *
    * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
    *
    * @param getCounterexampleOptions the {@link GetCounterexampleOptions} containing the options for the call
@@ -717,13 +746,15 @@ public class Assistant extends WatsonService {
     if (getCounterexampleOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getCounterexampleOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class,
+        shouldReturnNulls()));
   }
 
   /**
    * List counterexamples.
    *
    * List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.
+   *
    * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listCounterexamplesOptions the {@link ListCounterexamplesOptions} containing the options for the call
@@ -752,14 +783,16 @@ public class Assistant extends WatsonService {
     if (listCounterexamplesOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listCounterexamplesOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(CounterexampleCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(CounterexampleCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
    * Update counterexample.
    *
-   * Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input. This
-   * operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateCounterexampleOptions the {@link UpdateCounterexampleOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Counterexample}
@@ -776,14 +809,16 @@ public class Assistant extends WatsonService {
       contentJson.addProperty("text", updateCounterexampleOptions.newText());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class,
+        shouldReturnNulls()));
   }
 
   /**
    * Create entity.
    *
-   * Create a new entity. This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate
-   * limiting**.
+   * Create a new entity.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createEntityOptions the {@link CreateEntityOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Entity}
@@ -810,14 +845,15 @@ public class Assistant extends WatsonService {
       contentJson.addProperty("fuzzy_match", createEntityOptions.fuzzyMatch());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Entity.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Entity.class, shouldReturnNulls()));
   }
 
   /**
    * Delete entity.
    *
-   * Delete an entity from a workspace. This operation is limited to 1000 requests per 30 minutes. For more information,
-   * see **Rate limiting**.
+   * Delete an entity from a workspace.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteEntityOptions the {@link DeleteEntityOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of Void
@@ -835,9 +871,10 @@ public class Assistant extends WatsonService {
   /**
    * Get entity.
    *
-   * Get information about an entity, optionally including all entity content. With **export**=`false`, this operation
-   * is limited to 6000 requests per 5 minutes. With **export**=`true`, the limit is 200 requests per 30 minutes. For
-   * more information, see **Rate limiting**.
+   * Get information about an entity, optionally including all entity content.
+   *
+   * With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
+   * limit is 200 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param getEntityOptions the {@link GetEntityOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link EntityExport}
@@ -855,15 +892,17 @@ public class Assistant extends WatsonService {
     if (getEntityOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getEntityOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(EntityExport.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(EntityExport.class,
+        shouldReturnNulls()));
   }
 
   /**
    * List entities.
    *
-   * List the entities for a workspace. With **export**=`false`, this operation is limited to 1000 requests per 30
-   * minutes. With **export**=`true`, the limit is 200 requests per 30 minutes. For more information, see **Rate
-   * limiting**.
+   * List the entities for a workspace.
+   *
+   * With **export**=`false`, this operation is limited to 1000 requests per 30 minutes. With **export**=`true`, the
+   * limit is 200 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listEntitiesOptions the {@link ListEntitiesOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link EntityCollection}
@@ -893,15 +932,17 @@ public class Assistant extends WatsonService {
     if (listEntitiesOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listEntitiesOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(EntityCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(EntityCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
    * Update entity.
    *
    * Update an existing entity with new or modified data. You must provide component objects defining the content of the
-   * updated entity. This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate
-   * limiting**.
+   * updated entity.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateEntityOptions the {@link UpdateEntityOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Entity}
@@ -930,14 +971,15 @@ public class Assistant extends WatsonService {
       contentJson.addProperty("description", updateEntityOptions.newDescription());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Entity.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Entity.class, shouldReturnNulls()));
   }
 
   /**
    * Add entity value.
    *
-   * Create a new value for an entity. This operation is limited to 1000 requests per 30 minutes. For more information,
-   * see **Rate limiting**.
+   * Create a new value for an entity.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createValueOptions the {@link CreateValueOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Value}
@@ -964,14 +1006,15 @@ public class Assistant extends WatsonService {
       contentJson.addProperty("type", createValueOptions.valueType());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Value.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Value.class, shouldReturnNulls()));
   }
 
   /**
    * Delete entity value.
    *
-   * Delete a value from an entity. This operation is limited to 1000 requests per 30 minutes. For more information, see
-   * **Rate limiting**.
+   * Delete a value from an entity.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteValueOptions the {@link DeleteValueOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of Void
@@ -990,8 +1033,9 @@ public class Assistant extends WatsonService {
   /**
    * Get entity value.
    *
-   * Get information about an entity value. This operation is limited to 6000 requests per 5 minutes. For more
-   * information, see **Rate limiting**.
+   * Get information about an entity value.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
    *
    * @param getValueOptions the {@link GetValueOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link ValueExport}
@@ -1009,14 +1053,15 @@ public class Assistant extends WatsonService {
     if (getValueOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getValueOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ValueExport.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ValueExport.class, shouldReturnNulls()));
   }
 
   /**
    * List entity values.
    *
-   * List the values for an entity. This operation is limited to 2500 requests per 30 minutes. For more information, see
-   * **Rate limiting**.
+   * List the values for an entity.
+   *
+   * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listValuesOptions the {@link ListValuesOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link ValueCollection}
@@ -1046,15 +1091,17 @@ public class Assistant extends WatsonService {
     if (listValuesOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listValuesOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ValueCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ValueCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
    * Update entity value.
    *
    * Update an existing entity value with new or modified data. You must provide component objects defining the content
-   * of the updated entity value. This operation is limited to 1000 requests per 30 minutes. For more information, see
-   * **Rate limiting**.
+   * of the updated entity value.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateValueOptions the {@link UpdateValueOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Value}
@@ -1084,14 +1131,15 @@ public class Assistant extends WatsonService {
       contentJson.addProperty("value", updateValueOptions.newValue());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Value.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Value.class, shouldReturnNulls()));
   }
 
   /**
    * Add entity value synonym.
    *
-   * Add a new synonym to an entity value. This operation is limited to 1000 requests per 30 minutes. For more
-   * information, see **Rate limiting**.
+   * Add a new synonym to an entity value.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createSynonymOptions the {@link CreateSynonymOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Synonym}
@@ -1107,14 +1155,15 @@ public class Assistant extends WatsonService {
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("synonym", createSynonymOptions.synonym());
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class, shouldReturnNulls()));
   }
 
   /**
    * Delete entity value synonym.
    *
-   * Delete a synonym from an entity value. This operation is limited to 1000 requests per 30 minutes. For more
-   * information, see **Rate limiting**.
+   * Delete a synonym from an entity value.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteSynonymOptions the {@link DeleteSynonymOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of Void
@@ -1133,8 +1182,9 @@ public class Assistant extends WatsonService {
   /**
    * Get entity value synonym.
    *
-   * Get information about a synonym of an entity value. This operation is limited to 6000 requests per 5 minutes. For
-   * more information, see **Rate limiting**.
+   * Get information about a synonym of an entity value.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
    *
    * @param getSynonymOptions the {@link GetSynonymOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Synonym}
@@ -1150,14 +1200,15 @@ public class Assistant extends WatsonService {
     if (getSynonymOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getSynonymOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class, shouldReturnNulls()));
   }
 
   /**
    * List entity value synonyms.
    *
-   * List the synonyms for an entity value. This operation is limited to 2500 requests per 30 minutes. For more
-   * information, see **Rate limiting**.
+   * List the synonyms for an entity value.
+   *
+   * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listSynonymsOptions the {@link ListSynonymsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link SynonymCollection}
@@ -1185,14 +1236,16 @@ public class Assistant extends WatsonService {
     if (listSynonymsOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listSynonymsOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(SynonymCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(SynonymCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
    * Update entity value synonym.
    *
-   * Update an existing entity value synonym with new text. This operation is limited to 1000 requests per 30 minutes.
-   * For more information, see **Rate limiting**.
+   * Update an existing entity value synonym with new text.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateSynonymOptions the {@link UpdateSynonymOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link Synonym}
@@ -1210,14 +1263,15 @@ public class Assistant extends WatsonService {
       contentJson.addProperty("synonym", updateSynonymOptions.newSynonym());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class, shouldReturnNulls()));
   }
 
   /**
    * Create dialog node.
    *
-   * Create a new dialog node. This operation is limited to 500 requests per 30 minutes. For more information, see
-   * **Rate limiting**.
+   * Create a new dialog node.
+   *
+   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createDialogNodeOptions the {@link CreateDialogNodeOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link DialogNode}
@@ -1280,14 +1334,15 @@ public class Assistant extends WatsonService {
       contentJson.addProperty("digress_out_slots", createDialogNodeOptions.digressOutSlots());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class, shouldReturnNulls()));
   }
 
   /**
    * Delete dialog node.
    *
-   * Delete a dialog node from a workspace. This operation is limited to 500 requests per 30 minutes. For more
-   * information, see **Rate limiting**.
+   * Delete a dialog node from a workspace.
+   *
+   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteDialogNodeOptions the {@link DeleteDialogNodeOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of Void
@@ -1305,8 +1360,9 @@ public class Assistant extends WatsonService {
   /**
    * Get dialog node.
    *
-   * Get information about a dialog node. This operation is limited to 6000 requests per 5 minutes. For more
-   * information, see **Rate limiting**.
+   * Get information about a dialog node.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
    *
    * @param getDialogNodeOptions the {@link GetDialogNodeOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link DialogNode}
@@ -1321,14 +1377,15 @@ public class Assistant extends WatsonService {
     if (getDialogNodeOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getDialogNodeOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class, shouldReturnNulls()));
   }
 
   /**
    * List dialog nodes.
    *
-   * List the dialog nodes for a workspace. This operation is limited to 2500 requests per 30 minutes. For more
-   * information, see **Rate limiting**.
+   * List the dialog nodes for a workspace.
+   *
+   * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listDialogNodesOptions the {@link ListDialogNodesOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link DialogNodeCollection}
@@ -1355,14 +1412,16 @@ public class Assistant extends WatsonService {
     if (listDialogNodesOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listDialogNodesOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNodeCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNodeCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
    * Update dialog node.
    *
-   * Update an existing dialog node with new or modified data. This operation is limited to 500 requests per 30 minutes.
-   * For more information, see **Rate limiting**.
+   * Update an existing dialog node with new or modified data.
+   *
+   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateDialogNodeOptions the {@link UpdateDialogNodeOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link DialogNode}
@@ -1427,15 +1486,16 @@ public class Assistant extends WatsonService {
       contentJson.addProperty("dialog_node", updateDialogNodeOptions.newDialogNode());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class, shouldReturnNulls()));
   }
 
   /**
    * List log events in all workspaces.
    *
-   * List the events from the logs of all workspaces in the service instance. If **cursor** is not specified, this
-   * operation is limited to 40 requests per 30 minutes. If **cursor** is specified, the limit is 120 requests per
-   * minute. For more information, see **Rate limiting**.
+   * List the events from the logs of all workspaces in the service instance.
+   *
+   * If **cursor** is not specified, this operation is limited to 40 requests per 30 minutes. If **cursor** is
+   * specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
    *
    * @param listAllLogsOptions the {@link ListAllLogsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link LogCollection}
@@ -1455,15 +1515,17 @@ public class Assistant extends WatsonService {
     if (listAllLogsOptions.cursor() != null) {
       builder.query("cursor", listAllLogsOptions.cursor());
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LogCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LogCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
    * List log events in a workspace.
    *
-   * List the events from the log of a specific workspace. If **cursor** is not specified, this operation is limited to
-   * 40 requests per 30 minutes. If **cursor** is specified, the limit is 120 requests per minute. For more information,
-   * see **Rate limiting**.
+   * List the events from the log of a specific workspace.
+   *
+   * If **cursor** is not specified, this operation is limited to 40 requests per 30 minutes. If **cursor** is
+   * specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
    *
    * @param listLogsOptions the {@link ListLogsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link LogCollection}
@@ -1487,15 +1549,18 @@ public class Assistant extends WatsonService {
     if (listLogsOptions.cursor() != null) {
       builder.query("cursor", listLogsOptions.cursor());
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LogCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LogCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
    * Delete labeled data.
    *
    * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
-   * the customer ID. You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request
-   * that passes data. For more information about personal data and customer IDs, see [Information
+   * the customer ID.
+   *
+   * You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
+   * For more information about personal data and customer IDs, see [Information
    * security](https://console.bluemix.net/docs/services/conversation/information-security.html).
    *
    * @param deleteUserDataOptions the {@link DeleteUserDataOptions} containing the options for the call

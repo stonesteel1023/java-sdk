@@ -173,7 +173,8 @@ public class NaturalLanguageUnderstanding extends WatsonService {
       contentJson.addProperty("limit_text_characters", analyzeOptions.limitTextCharacters());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AnalysisResults.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(AnalysisResults.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -203,13 +204,14 @@ public class NaturalLanguageUnderstanding extends WatsonService {
    * @param listModelsOptions the {@link ListModelsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a response type of {@link ListModelsResults}
    */
-  public ServiceCall<ListModelsResults> listModels(ListModelsOptions listModelsOptions) {
+  public ServiceCall<ListModelsResults> listModels() {
     String[] pathSegments = { "v1/models" };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments));
     builder.query(VERSION, versionDate);
     if (listModelsOptions != null) {
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListModelsResults.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ListModelsResults.class,
+        shouldReturnNulls()));
   }
 
   /**

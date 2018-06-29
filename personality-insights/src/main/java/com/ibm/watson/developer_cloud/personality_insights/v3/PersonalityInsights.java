@@ -145,7 +145,8 @@ public class PersonalityInsights extends WatsonService {
     } else {
       builder.bodyContent(profileOptions.body(), profileOptions.contentType());
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Profile.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Profile.class,
+        shouldReturnNulls()));
   }
 
   /**

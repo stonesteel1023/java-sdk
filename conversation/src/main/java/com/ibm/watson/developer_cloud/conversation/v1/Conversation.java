@@ -187,7 +187,8 @@ public class Conversation extends WatsonService {
       contentJson.add("output", GsonSingleton.getGson().toJsonTree(messageOptions.output()));
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(MessageResponse.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(MessageResponse.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -237,7 +238,7 @@ public class Conversation extends WatsonService {
       }
       builder.bodyJson(contentJson);
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Workspace.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Workspace.class, shouldReturnNulls()));
   }
 
   /**
@@ -298,7 +299,8 @@ public class Conversation extends WatsonService {
     if (getWorkspaceOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getWorkspaceOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(WorkspaceExport.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(WorkspaceExport.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -332,7 +334,8 @@ public class Conversation extends WatsonService {
         builder.query("include_audit", String.valueOf(listWorkspacesOptions.includeAudit()));
       }
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(WorkspaceCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(WorkspaceCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -398,7 +401,7 @@ public class Conversation extends WatsonService {
       contentJson.addProperty("learning_opt_out", updateWorkspaceOptions.learningOptOut());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Workspace.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Workspace.class, shouldReturnNulls()));
   }
 
   /**
@@ -427,7 +430,7 @@ public class Conversation extends WatsonService {
       contentJson.add("examples", GsonSingleton.getGson().toJsonTree(createIntentOptions.examples()));
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Intent.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Intent.class, shouldReturnNulls()));
   }
 
   /**
@@ -474,7 +477,8 @@ public class Conversation extends WatsonService {
     if (getIntentOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getIntentOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IntentExport.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IntentExport.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -513,7 +517,8 @@ public class Conversation extends WatsonService {
     if (listIntentsOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listIntentsOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IntentCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IntentCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -545,7 +550,7 @@ public class Conversation extends WatsonService {
       contentJson.addProperty("description", updateIntentOptions.newDescription());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Intent.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Intent.class, shouldReturnNulls()));
   }
 
   /**
@@ -568,7 +573,7 @@ public class Conversation extends WatsonService {
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("text", createExampleOptions.text());
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class, shouldReturnNulls()));
   }
 
   /**
@@ -612,7 +617,7 @@ public class Conversation extends WatsonService {
     if (getExampleOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getExampleOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class, shouldReturnNulls()));
   }
 
   /**
@@ -647,7 +652,8 @@ public class Conversation extends WatsonService {
     if (listExamplesOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listExamplesOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ExampleCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ExampleCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -673,7 +679,7 @@ public class Conversation extends WatsonService {
       contentJson.addProperty("text", updateExampleOptions.newText());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Example.class, shouldReturnNulls()));
   }
 
   /**
@@ -696,7 +702,8 @@ public class Conversation extends WatsonService {
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("text", createCounterexampleOptions.text());
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -739,7 +746,8 @@ public class Conversation extends WatsonService {
     if (getCounterexampleOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getCounterexampleOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -775,7 +783,8 @@ public class Conversation extends WatsonService {
     if (listCounterexamplesOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listCounterexamplesOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(CounterexampleCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(CounterexampleCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -800,7 +809,8 @@ public class Conversation extends WatsonService {
       contentJson.addProperty("text", updateCounterexampleOptions.newText());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Counterexample.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -835,7 +845,7 @@ public class Conversation extends WatsonService {
       contentJson.addProperty("fuzzy_match", createEntityOptions.fuzzyMatch());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Entity.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Entity.class, shouldReturnNulls()));
   }
 
   /**
@@ -882,7 +892,8 @@ public class Conversation extends WatsonService {
     if (getEntityOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getEntityOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(EntityExport.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(EntityExport.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -921,7 +932,8 @@ public class Conversation extends WatsonService {
     if (listEntitiesOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listEntitiesOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(EntityCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(EntityCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -959,7 +971,7 @@ public class Conversation extends WatsonService {
       contentJson.addProperty("description", updateEntityOptions.newDescription());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Entity.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Entity.class, shouldReturnNulls()));
   }
 
   /**
@@ -994,7 +1006,7 @@ public class Conversation extends WatsonService {
       contentJson.addProperty("type", createValueOptions.valueType());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Value.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Value.class, shouldReturnNulls()));
   }
 
   /**
@@ -1041,7 +1053,7 @@ public class Conversation extends WatsonService {
     if (getValueOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getValueOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ValueExport.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ValueExport.class, shouldReturnNulls()));
   }
 
   /**
@@ -1079,7 +1091,8 @@ public class Conversation extends WatsonService {
     if (listValuesOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listValuesOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ValueCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ValueCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1118,7 +1131,7 @@ public class Conversation extends WatsonService {
       contentJson.addProperty("value", updateValueOptions.newValue());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Value.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Value.class, shouldReturnNulls()));
   }
 
   /**
@@ -1142,7 +1155,7 @@ public class Conversation extends WatsonService {
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("synonym", createSynonymOptions.synonym());
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class, shouldReturnNulls()));
   }
 
   /**
@@ -1187,7 +1200,7 @@ public class Conversation extends WatsonService {
     if (getSynonymOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getSynonymOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class, shouldReturnNulls()));
   }
 
   /**
@@ -1223,7 +1236,8 @@ public class Conversation extends WatsonService {
     if (listSynonymsOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listSynonymsOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(SynonymCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(SynonymCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1249,7 +1263,7 @@ public class Conversation extends WatsonService {
       contentJson.addProperty("synonym", updateSynonymOptions.newSynonym());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Synonym.class, shouldReturnNulls()));
   }
 
   /**
@@ -1320,7 +1334,7 @@ public class Conversation extends WatsonService {
       contentJson.addProperty("digress_out_slots", createDialogNodeOptions.digressOutSlots());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class, shouldReturnNulls()));
   }
 
   /**
@@ -1363,7 +1377,7 @@ public class Conversation extends WatsonService {
     if (getDialogNodeOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(getDialogNodeOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class, shouldReturnNulls()));
   }
 
   /**
@@ -1398,7 +1412,8 @@ public class Conversation extends WatsonService {
     if (listDialogNodesOptions.includeAudit() != null) {
       builder.query("include_audit", String.valueOf(listDialogNodesOptions.includeAudit()));
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNodeCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNodeCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1471,7 +1486,7 @@ public class Conversation extends WatsonService {
       contentJson.addProperty("dialog_node", updateDialogNodeOptions.newDialogNode());
     }
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(DialogNode.class, shouldReturnNulls()));
   }
 
   /**
@@ -1500,7 +1515,8 @@ public class Conversation extends WatsonService {
     if (listAllLogsOptions.cursor() != null) {
       builder.query("cursor", listAllLogsOptions.cursor());
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LogCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LogCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -1533,7 +1549,8 @@ public class Conversation extends WatsonService {
     if (listLogsOptions.cursor() != null) {
       builder.query("cursor", listLogsOptions.cursor());
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LogCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(LogCollection.class,
+        shouldReturnNulls()));
   }
 
   /**

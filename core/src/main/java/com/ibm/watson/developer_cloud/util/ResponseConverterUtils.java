@@ -72,11 +72,12 @@ public final class ResponseConverterUtils {
    * @param type the type
    * @return the response converter
    */
-  public static <T extends ObjectModel> ResponseConverter<T> getObject(final Class<? extends T> type) {
+  public static <T extends ObjectModel> ResponseConverter<T> getObject(
+      final Class<? extends T> type, final boolean returnNulls) {
     return new ResponseConverter<T>() {
       @Override
       public T convert(Response response) {
-        return ResponseUtils.getObject(response, type);
+        return ResponseUtils.getObject(response, type, returnNulls);
       }
     };
   }

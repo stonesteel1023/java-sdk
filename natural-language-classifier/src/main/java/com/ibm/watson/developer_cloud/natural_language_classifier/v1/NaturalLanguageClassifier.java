@@ -106,7 +106,8 @@ public class NaturalLanguageClassifier extends WatsonService {
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("text", classifyOptions.text());
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classification.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classification.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -129,7 +130,8 @@ public class NaturalLanguageClassifier extends WatsonService {
     final JsonObject contentJson = new JsonObject();
     contentJson.add("collection", GsonSingleton.getGson().toJsonTree(classifyCollectionOptions.collection()));
     builder.bodyJson(contentJson);
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ClassificationCollection.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ClassificationCollection.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -153,7 +155,8 @@ public class NaturalLanguageClassifier extends WatsonService {
     RequestBody trainingDataBody = RequestUtils.inputStreamBody(createClassifierOptions.trainingData(), "text/csv");
     multipartBuilder.addFormDataPart("training_data", createClassifierOptions.trainingDataFilename(), trainingDataBody);
     builder.body(multipartBuilder.build());
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifier.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifier.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -185,7 +188,8 @@ public class NaturalLanguageClassifier extends WatsonService {
     String[] pathParameters = { getClassifierOptions.classifierId() };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments,
         pathParameters));
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifier.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Classifier.class,
+        shouldReturnNulls()));
   }
 
   /**
@@ -201,7 +205,8 @@ public class NaturalLanguageClassifier extends WatsonService {
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getEndPoint(), pathSegments));
     if (listClassifiersOptions != null) {
     }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ClassifierList.class));
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(ClassifierList.class,
+        shouldReturnNulls()));
   }
 
   /**
